@@ -1,0 +1,85 @@
+﻿CREATE DATABASE HELPDESK;
+
+USE HELPDESK;
+
+
+
+CREATE TABLE USUARIO(
+ 
+PK_ID_USUARIO BIGINT primary key auto_increment,  
+
+NOME varchar(40),
+  
+RAMAL varchar(4),
+ 
+TELEFONE_CELULAR varchar(11),
+  
+TELEFONE_FIXO varchar(11),
+  
+EMAIL varchar(50),
+  
+SENHA varchar(8),
+  
+DATA_HORA_CADASTRO datetime
+
+);
+
+
+
+
+
+
+
+CREATE TABLE CHAMADO( 
+
+PK_ID_CHAMADO BIGINT primary key auto_increment, 
+FK_ID_USUARIO BIGINT,
+
+TITULO varchar(200),
+  
+DESCRICAO text,
+  
+ANEXO varchar(40),
+  
+STATUS varchar(10),
+  
+DATA_HORA_CADASTRO datetime
+,
+foreign key(FK_ID_USUARIO) references USUARIO(PK_ID_USUARIO)
+);
+
+
+
+
+
+
+
+
+
+CREATE TABLE CHAMADO_ACOMPANHAMENTO( 
+
+PK_ID_CHAMADO_ACOMPANHAMENTO BIGINT primary key auto_increment,
+  
+FK_ID_CHAMADO BIGINT,
+  
+
+DESCRICAO text,
+  
+DATA_HORA_CADASTRO datetime,
+
+foreign key(FK_ID_CHAMADO) references CHAMADO(PK_ID_CHAMADO)
+
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
