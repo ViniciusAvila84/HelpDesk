@@ -253,16 +253,17 @@ class Usuario extends CI_Controller {
 		//$this->candidato->email_senha($email, $dados);
 		$dados['usuarios'] = $this -> usuario->email_senha();
 
-		//$teste1= $usuario[0]->nome_completo;
+		//$teste1= $usuario[0]->nome_completo; 
 
 		
 		
 		$termo= $email;
+		//$termo= $this->input->post('email');
 		$this->load->model('usuario_model', 'usuario');	
 		$dados= $this -> usuario->get_usuario_email_like($termo);
 		foreach($dados as $campo) { 
-			$teste_email = $campo->email;
-			$teste_destino = $campo->nome;
+			//$teste_email = $campo->email;
+			//$teste_destino = $campo->nome;
 			//$email= $teste_email;
 			$this->load->library('My_PHPMailer');
 			$mail = new My_phpmailer();
@@ -277,7 +278,7 @@ class Usuario extends CI_Controller {
 			<html>
 			<body style="margin:0px;">
 				<div style="background-color:#fff; width:90%; height:150px; text-align:left; border-radius: 10px; margin: 0 auto;">
-					<h3 style="color: #000; font-size: 20px;">Olá '.$teste_destino.',</h3>
+					<h3 style="color: #000; font-size: 20px;">Olá ,</h3>
 					<p style="color: #000; font-size: 18px; line-height: 1.4px;">Estamos lhe enviando a sua nova senha: '.$pass.'</p>
 					
 					

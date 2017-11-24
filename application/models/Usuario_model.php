@@ -185,8 +185,8 @@
 		}
 
 		function get_usuario_email_like($termo=null){
-        	$this->db->select('nome, email');
-			$this->db->from('usuario');
+        	$this->db->select('*');
+			$this->db->from('USUARIO');
 			$this->db->where('email',$termo); 
 			//$this->db->join('titulo', 'RAMAL.FK_GRUPO_DE_CAPTURA = GRUPO_DE_CAPTURA.ID_GRUPO_DE_CAPTURA','inner');
 			//$this->db->like('lower(RAMAL.NOME)',strtolower($termo));

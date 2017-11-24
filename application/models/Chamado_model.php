@@ -110,7 +110,58 @@ class Chamado_model extends CI_Model
                         
 						return $this->db->update ('CHAMADO',$data);
                         
-                    
+           $idmail = $this->session->userdata('pk_id_usuario');
+			$this->db->select('*');
+			$this->db->from('USUARIO');
+			$this->db->where('PK_ID_USUARIO',$idmail);
+			$datamail ['verifica'] = $this->db->get()->result();
+			$nomeusuario= ($datamail ['verifica'][0]->NOME); 
+			
+			
+
+            $email= ($datamail ['verifica'][0]->EMAIL); 
+			$this->load->library('My_PHPMailer');
+			$mail = new My_phpmailer();
+			$from = 'no-replay@stv.com.br';
+			$fromName= 'Enviado pelo Site';
+			$host = '192.168.0.49';
+			$username = 'teste';
+			$password='teste';
+			$port=25;
+			$secure=false;
+			
+			$conteudo ='
+			<html>
+			<body style="margin:0px;">
+				<div style="background-color:#fff; width:90%; height:150px; text-align:left; border-radius: 10px; margin: 0 auto;">
+					<h3 style="color: #000; font-size: 20px;">Olá '.$nomeusuario.',</h3>
+					<p style="color: #000; font-size: 18px; line-height: 1.4px;">Recebemos seu chamado com sucesso. Aguarde nosso contato</p>
+					
+					
+				</div>
+			</body>
+			</html>		
+			';
+			$mail ->setLanguage('pt');
+			$mail->isSMTP();
+			$mail->SMTPDebug = 0;
+			$mail->Host = $host;
+			$mail->SMTPAuth = false;
+			$mail->Username = $username;
+			$mail->Password = $password;
+			$mail->Port = $port;
+			$mail->SMTPSecure = $secure;
+			$mail->isHTML(true);
+			$mail->CharSet ='utf-8';
+			$mail->WordWrap=70;
+			$mail->From =$from;
+			$mail->fromName =$fromName;
+			$mail->SetFrom('no-relay@stv.com.br', 'Sistema - STV Segurança');
+			$mail->addAddress($email);
+			//$mail->addAddress($campo->email);
+			$mail->Subject='Solicitação de senha';
+			$mail->Body = $conteudo;
+			$send = $mail->Send();
 					
 					
 					$idsecao = $this->session->userdata('pk_id_usuario');
@@ -189,6 +240,7 @@ class Chamado_model extends CI_Model
 				
 			}
 			
+			
 				
 			$data['TITULO'] = $this->input->post('titulo');
 			$data['DESCRICAO'] = $this->input->post('descricao');
@@ -198,7 +250,61 @@ class Chamado_model extends CI_Model
 			$data['FK_ID_USUARIO'] = $this->input->post('fk_id_usuario');
 			$data['FK_ID_ASSUNTO'] = $this->input->post('fk_id_assunto');
 			$data['DATA_HORA_CADASTRO_CHAMADO'] = date('Y-m-d H:i:s');
-			 $this->db->insert('CHAMADO',$data);
+			$this->db->insert('CHAMADO',$data);
+			 
+			 
+			$idmail = $this->session->userdata('pk_id_usuario');
+			$this->db->select('*');
+			$this->db->from('USUARIO');
+			$this->db->where('PK_ID_USUARIO',$idmail);
+			$datamail ['verifica'] = $this->db->get()->result();
+			$nomeusuario= ($datamail ['verifica'][0]->NOME); 
+			
+			
+
+            $email= ($datamail ['verifica'][0]->EMAIL); 
+			$this->load->library('My_PHPMailer');
+			$mail = new My_phpmailer();
+			$from = 'no-replay@stv.com.br';
+			$fromName= 'Enviado pelo Site';
+			$host = '192.168.0.49';
+			$username = 'teste';
+			$password='teste';
+			$port=25;
+			$secure=false;
+			
+			$conteudo ='
+			<html>
+			<body style="margin:0px;">
+				<div style="background-color:#fff; width:90%; height:150px; text-align:left; border-radius: 10px; margin: 0 auto;">
+					<h3 style="color: #000; font-size: 20px;">Olá '.$nomeusuario.',</h3>
+					<p style="color: #000; font-size: 18px; line-height: 1.4px;">Recebemos seu chamado com sucesso. Aguarde nosso contato</p>
+					
+					
+				</div>
+			</body>
+			</html>		
+			';
+			$mail ->setLanguage('pt');
+			$mail->isSMTP();
+			$mail->SMTPDebug = 0;
+			$mail->Host = $host;
+			$mail->SMTPAuth = false;
+			$mail->Username = $username;
+			$mail->Password = $password;
+			$mail->Port = $port;
+			$mail->SMTPSecure = $secure;
+			$mail->isHTML(true);
+			$mail->CharSet ='utf-8';
+			$mail->WordWrap=70;
+			$mail->From =$from;
+			$mail->fromName =$fromName;
+			$mail->SetFrom('no-relay@stv.com.br', 'Sistema - STV Segurança');
+			$mail->addAddress($email);
+			//$mail->addAddress($campo->email);
+			$mail->Subject='Solicitação de senha';
+			$mail->Body = $conteudo;
+			$send = $mail->Send();
                         
                         $id=$this->input->post('PK_ID_CHAMADO');
                         $this-> db -> where('PK_ID_CHAMADO',$id);
@@ -212,6 +318,10 @@ class Chamado_model extends CI_Model
 						$data2['FK_ID_CHAMADO'] = $id;
 						return $this->db->insert('HISTORICO',$data2);
 						//INSERIR NA TABELA HISTORICO
+						
+			
+			
+			
 		}
                 
                 
@@ -380,6 +490,13 @@ class Chamado_model extends CI_Model
 						$data2['FK_ID_CHAMADO'] = $id;
 						return $this->db->insert('HISTORICO',$data2);
 						//INSERIR NA TABELA HISTORICO
+						
+						
+						
+						
+						
+						
+						
 						
 						
                         return $this->db->update ('CHAMADO',$data);

@@ -14,8 +14,8 @@
         <input type="checkbox" value="remember-me">Lembrar senha!
       </label>
     </div>
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Acessar</button>
-    <a href="<?= base_url('index.php/candidato/cadastrese')?>" class="btn btn-lg btn-default btn-block">Cadastre-se</a>
+  <button class="btn btn-lg btn-primary btn-block" type="submit">Acessar</button>
+    <!--  <a href="<?= base_url('index.php/candidato/cadastrese')?>" class="btn btn-lg btn-default btn-block">Cadastre-se</a> -->
       
     <br/>
     <a href="" type="text" data-target="#myModal" data-toggle="modal" class="">Esqueci a minha senha!</a>
